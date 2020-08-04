@@ -1,0 +1,24 @@
+{
+    "name": "dominicwatts/sagepay-sdk-php",
+    "description": "Sagepay wrapper and mordernization for SDK that supports server, form and direct payments",
+    "keywords": ["sagepay", "gateway", "sdk", "php"],
+    "version": "1.0.0",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Dominic Xigen",
+            "email": "dominic@xigen.co.uk"
+        }
+    ],
+    "require": {
+        "php": ">=5.6.4",
+        "ext-dom": "*",
+        "phpseclib/mcrypt_compat": "1.0.8"
+    },
+    "autoload": {
+        "psr-4": {
+            "Xigen\\Library\\Sagepay\\": "src/",
+            "Xigen\\Library\\Sagepay\\Classes\\": "src/Classes"
+        }
+    }
+}
