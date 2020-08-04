@@ -18,11 +18,6 @@ class Payment extends Constants
     const PAYPAY = 'paypal';
 
     /**
-     * @var array
-     */
-    public $config = [];
-
-    /**
      * @var stdClass
      */
     public $api = null;
@@ -31,7 +26,7 @@ class Payment extends Constants
      * @param string $type Integration type
      * @param array $type Integration type
      */
-    public function __construct($type = null, $config = [])
+    public function __construct($type = null, $customConfig = [])
     {
         parent::__construct();
         //------------------------------------------------------------------------------
@@ -66,7 +61,7 @@ class Payment extends Constants
         ini_set('display_errors', 'Off');
 
         // Configuration file
-        $this->config = [
+        $baseConfig = [
             // Mandatory  parameter
             //   Set to any of: TEST for the Test Server and LIVE for the live environment
             'env' => 'test',
@@ -177,7 +172,7 @@ class Payment extends Constants
             'caCertPath' => '',
         ];
 
-        $settings =  array_replace($this->config, $config);
+        $settings =  array_replace($baseConfig, $customConfig);
         $sagepaySettings = new SagepaySettings($settings);
         $this->api = SagepayApiFactory::create($type, $sagepaySettings);
     }
