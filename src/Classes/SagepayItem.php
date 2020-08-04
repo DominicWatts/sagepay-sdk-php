@@ -592,10 +592,10 @@ class SagepayItem
      *
      * @return DOMNode
      */
-    public function asDomElement(DOMDocument $basket)
+    public function asDomElement(\DOMDocument $basket)
     {
         $item = $basket->createElement('item');
-        $props = get_class_vars('SagepayItem');
+        $props = get_class_vars(SagepayItem::class);
         foreach ($props as $name => $value) {
             $name = substr($name, 1);
             if (substr($name, 0, 9) === 'recipient') {
