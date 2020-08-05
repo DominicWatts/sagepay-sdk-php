@@ -230,6 +230,7 @@ class SagepayCommon
                 $formValues['VPSProtocol'] = $settings->getProtocolVersion();
                 $formValues['TxType'] = $txType;
                 $formValues['Crypt'] = SagepayUtil::encryptAes($queryStr, $settings->getFormEncryptionPassword($env));
+                $formValues['VendorTxCode'] = $query['VendorTxCode'];
                 // Encrypt order details using base64 and the secret key from the settings.
                 return $formValues;
 
