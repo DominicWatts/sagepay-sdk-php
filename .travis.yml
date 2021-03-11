@@ -12,10 +12,11 @@ matrix:
 
 install:
   - curl -s http://getcomposer.org/installer | php
+  - composer self-update --1
   - php composer.phar install --dev --no-interaction
 script:
   - mkdir -p build/logs
-  - php vendor/bin/phpunit -c phpunit.xml --coverage-filter ./build/logs/ --coverage-clover ./build/logs/clover.xml
+  - XDEBUG_MODE=coverage php vendor/bin/phpunit -c phpunit.xml --coverage-filter build/logs/ --coverage-clover build/logs/clover.xml
 
 after_success:
-  - travis_retry php vendor/bin/php-coveralls --coverage_clover=./build/logs/clover.xml -v
+  - travis_retry php vendor/bin/php-coveralls --coverage_clover=build/logs/clover.xml -v
