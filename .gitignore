@@ -4,3 +4,8 @@ nbproject
 .buildpath
 .DS_Store
 .idea
+vendor
+composer.lock
+.phpunit.result.cache
+clover.xml
+build
