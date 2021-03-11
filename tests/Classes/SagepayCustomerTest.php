@@ -96,4 +96,16 @@ class SagepayCustomerTest extends TestCase
         $customer->setCustomerMiddleInitial($string);
         self::assertSame($string, $customer->getCustomerMiddleInitial());
     }
+
+    /**
+     * Export customer details as XML string
+     *
+     * @return string XML with customer details
+     */
+    public function testExport()
+    {
+        $customer = new SagepayCustomer();
+        self::assertIsString($customer->export());
+        self::assertXmlStringEqualsXmlString('<customer/>', $customer->export());
+    }
 }
