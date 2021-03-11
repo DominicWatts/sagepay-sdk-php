@@ -80,8 +80,8 @@ class SagepayCustomerTest extends TestCase
     {
         $customer = new SagepayCustomer();
         $string = "xyz";
-        $customer->setCustomerWorkPhone($string);
-        self::assertSame($string, $customer->getCustomerWorkPhone());
+        $customer->setCustomerBirth($string);
+        self::assertSame($string, $customer->getCustomerBirth());
     }
 
     /**
