@@ -564,7 +564,7 @@ class SagepayBasket
     /**
      * Export as string with Sagepay specific format
      *
-     * @return type
+     * @return string
      */
     private function _serialize()
     {

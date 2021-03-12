@@ -30,4 +30,26 @@ class SagepayApiFactoryTest extends TestCase
         self::assertIsObject($class);
         self::assertInstanceOf(SagepayFormApi::class, $class);
     }
+
+    public function testDirect()
+    {
+        $payment = new Payment(Payment::DIRECT);
+        $class = SagepayApiFactory::create(
+            Payment::DIRECT,
+            new SagepaySettings(['test' => 'value'])
+        );
+        self::assertIsObject($class);
+        self::assertInstanceOf(SagepayDirectApi::class, $class);
+    }
+
+    public function testServer()
+    {
+        $payment = new Payment(Payment::SERVER);
+        $class = SagepayApiFactory::create(
+            Payment::SERVER,
+            new SagepaySettings(['test' => 'value'])
+        );
+        self::assertIsObject($class);
+        self::assertInstanceOf(SagepayServerApi::class, $class);
+    }
 }

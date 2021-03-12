@@ -53,6 +53,10 @@ var_dump($api);
 $api->createRequest();
 ```
 
+## Update
+
+Check `./tests` for more comprehensive usage
+
 ## Copyright
 
 The original SDK belongs to SagePay and is their intellectual property. No license information is available but this is based on their publicly accessible source code.
