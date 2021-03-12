@@ -31,6 +31,20 @@ class SagepayCardDetailsTest extends TestCase
         self::assertSame($string, $cardDetails->getCv2());
     }
 
+    /**
+     * Writing data to inaccessible properties
+     *
+     * @param string $name
+     * @param string $value
+     */
+    public function testMagicSetter()
+    {
+        $cardDetails = new SagepayCardDetails();
+        $string = "xyz";
+        $cardDetails->__set('cardHolder', $string);
+        self::assertSame($string, $cardDetails->getCardHolder());
+    }
+
     public function testValidate()
     {
         $cardDetails = new SagepayCardDetails();
