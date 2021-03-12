@@ -425,6 +425,13 @@ class SagepaySettingsTest extends TestCase
         self::assertSame($bool, $this->sagepaySettings->basketAsXmlDisabled());
     }
 
+    public function testInvalidBasketAsXmlDisabled()
+    {
+        $this->expectError();
+        $string = "123";
+        $this->sagepaySettings->setBasketAsXmlDisable($string);
+    }
+
     /**
      * Get merchant account type
      *
@@ -465,8 +472,8 @@ class SagepaySettingsTest extends TestCase
      */
     public function testGetFormFailureUrl()
     {
-        $string = 'https://test.com/form/failure';
-        self::assertSame($string, $this->sagepaySettings->getFullFormFailureUrl());
+        $string = 'form/failure';
+        self::assertSame($string, $this->sagepaySettings->getFormFailureUrl());
     }
 
     /**
@@ -521,15 +528,14 @@ class SagepaySettingsTest extends TestCase
     }
 
     /**
-     * Get full URL for Form Successes
+     * Get success page redirect for FORM Protocol
      *
-     * @param string $env Specific environment
-     * @return string
+     * @return string  FORM Protocol success URL
      */
     public function testGetFormSuccessUrl()
     {
-        $string = 'https://test.com/form/success';
-        self::assertSame($string, $this->sagepaySettings->getFullFormSuccessUrl());
+        $string = 'form/success';
+        self::assertSame($string, $this->sagepaySettings->getFormSuccessUrl());
     }
 
     /**
@@ -566,5 +572,32 @@ class SagepaySettingsTest extends TestCase
         $string = 'test';
         $this->sagepaySettings->setPartnerId($string);
         self::assertSame($string, $this->sagepaySettings->getPartnerId());
+    }
+
+    public function testGetInstance()
+    {
+        $setting = $this->sagepaySettings->getInstance(['vendor']);
+        self::assertIsObject($setting);
+    }
+
+    /**
+     * Get SagePay Protocol Version used for payment
+     *
+     * @return float  Protocol version
+     */
+    public function testGetProtocolVersion()
+    {
+        $float = 3.00;
+        $string = number_format($float, 2);
+        $this->sagepaySettings->setProtocolVersion($float);
+        self::assertSame($string, $this->sagepaySettings->getProtocolVersion());
+        self::assertIsString($this->sagepaySettings->getProtocolVersion());
+    }
+
+    public function testInvalidProtocolVersion()
+    {
+        $this->expectError();
+        $int = 3;
+        $this->sagepaySettings->setProtocolVersion($int);
     }
 }
