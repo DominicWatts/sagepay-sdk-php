@@ -5,45 +5,30 @@ namespace Classes;
 use Xigen\Library\Sagepay\Payment;
 use PHPUnit\Framework\TestCase;
 
-class SagepayDirectApiTest extends TestCase
+class SagepayServerApiTest extends TestCase
 {
     protected $preserveGlobalState = FALSE;
     protected $runTestInSeparateProcess = TRUE;
 
     /**
-     * Get vpsDirectUrl
+     * Get vpsServerUrl
      *
      * @return string
      */
-    public function testGetVpsDirectUrl()
+    public function testGtVpsServerUrl()
     {
-        $payment = new Payment(Payment::DIRECT);
+        $payment = new Payment(Payment::SERVER);
         $api = $payment->getApi();
-        $vpsDirectUrl = $api->getVpsDirectUrl();
-        $url = 'https://test.sagepay.com/gateway/service/vspdirect-register.vsp';
+        $vpsDirectUrl = $api->getVpsServerUrl();
+        $url = 'https://test.sagepay.com/gateway/service/vspserver-register.vsp';
         self::assertIsString($vpsDirectUrl);
         self::assertSame($vpsDirectUrl, $url);
 
-        $liveUrl = 'https://live.sagepay.com/gateway/service/vspdirect-register.vsp';
-        $api->setVpsDirectUrl($liveUrl);
-        $vpsDirectUrl = $api->getVpsDirectUrl();
+        $liveUrl = 'https://live.sagepay.com/gateway/service/vspserver-register.vsp';
+        $api->setVpsServerUrl($liveUrl);
+        $vpsDirectUrl = $api->getVpsServerUrl();
         self::assertIsString($vpsDirectUrl);
         self::assertSame($vpsDirectUrl, $liveUrl);
-    }
-
-    /**
-     * Set integrationMethod
-     *
-     * @param string $integrationMethod
-     */
-    public function testSetIntegrationMethod()
-    {
-        $payment = new Payment(Payment::DIRECT);
-        $api = $payment->getApi();
-        $api->setIntegrationMethod(Payment::DIRECT);
-        $integrationMethod = $api->getIntegrationMethod();
-        self::assertIsString($integrationMethod);
-        self::assertSame($integrationMethod, Payment::DIRECT);
     }
 
     /**
@@ -52,7 +37,7 @@ class SagepayDirectApiTest extends TestCase
      */
     public function testGetQueryData()
     {
-        $payment = new Payment(Payment::DIRECT);
+        $payment = new Payment(Payment::SERVER);
         $api = $payment->getApi();
         $queryData = $api->getQueryData();
         self::assertEmpty($queryData);
@@ -68,7 +53,7 @@ class SagepayDirectApiTest extends TestCase
     public function testCreateRequest()
     {
         $this->expectError();
-        $payment = new Payment(Payment::DIRECT);
+        $payment = new Payment(Payment::SERVER);
         $api = $payment->getApi();
         $api->createRequest();
     }
