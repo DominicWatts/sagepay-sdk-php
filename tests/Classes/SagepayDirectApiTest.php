@@ -52,4 +52,19 @@ class SagepayDirectApiTest extends TestCase
         $queryData = $api->getQueryData();
         self::assertEmpty($queryData);
     }
+
+    /**
+     * Generate values for payment.
+     * Ensure that post data is setted to request with SagepayAbstractApi::setData()
+     *
+     * @see SagepayAbstractApi::createRequest()
+     * @return array The response from Sage Pay
+     */
+    public function testCreateRequest()
+    {
+        $this->expectError();
+        $payment = new Payment(Payment::DIRECT);
+        $api = $payment->getApi();
+        $api->createRequest();
+    }
 }
