@@ -8,6 +8,8 @@
 
 [![Coverage Status](https://coveralls.io/repos/github/DominicWatts/sagepay-sdk-php/badge.svg)](https://coveralls.io/github/DominicWatts/sagepay-sdk-php)
 
+![PHPUnit](https://github.com/DominicWatts/sagepay-sdk-php/workflows/PHPUnit/badge.svg)
+
 [Coveralls Status](https://coveralls.io/github/DominicWatts/sagepay-sdk-php)
 
 Sage Pay PHP SDK for server, frame and direct integrations based on the official Sage Pay SDK. This is a composer compatible Sage Pay V3 PHP SDK. This is not an official Sage Pay package.
