@@ -82,6 +82,13 @@ class SagepaySettingsTest extends TestCase
         self::assertSame($string, $this->sagepaySettings->getWebsite());
     }
 
+    public function testInvalidWebsite()
+    {
+        $this->expectError();
+        $string = "";
+        $this->sagepaySettings->setWebsite($string);
+    }
+
     /**
      * Get value of Collect recipient details option
      *
@@ -149,6 +156,18 @@ class SagepaySettingsTest extends TestCase
     {
         $string = 'https://test.com/form/success';
         self::assertSame($string, $this->sagepaySettings->getFullFormSuccessUrl());
+    }
+
+    /**
+     * Get full URL for Form Failures
+     *
+     * @param string $env Specific environment
+     * @return string
+     */
+    public function testGetFullFormFailureUrl()
+    {
+        $string = 'https://test.com/form/failure';
+        self::assertSame($string, $this->sagepaySettings->getFullFormFailureUrl());
     }
 
     /**
@@ -282,6 +301,21 @@ class SagepaySettingsTest extends TestCase
     }
 
     /**
+     * Get value of specific Registration Service
+     *
+     * @param  string  $method  Method alias
+     * @param  string  $env     Environment name, by default is using current environment value
+     *
+     * @return string Registration Service URL
+     */
+    public function testGetCustomPurchaseUrl()
+    {
+        $url = 'https://test.com';
+        $this->sagepaySettings->setPurchaseUrl($url, 'server', 'live');
+        self::assertSame($url, $this->sagepaySettings->getPurchaseUrl('server', 'live'));
+    }
+
+    /**
      * Get password salt for the local customer password database used by the kit
      *
      * @return string  Password salt
@@ -323,6 +357,14 @@ class SagepaySettingsTest extends TestCase
         $this->sagepaySettings->setLogError($bool);
         self::assertSame($bool, $this->sagepaySettings->getLogError());
     }
+
+    public function testInvalidLogError()
+    {
+        $this->expectError();
+        $string = "xyz";
+        $this->sagepaySettings->setLogError($string);
+    }
+
 
     /**
      * Get value of Billing Agreement option
@@ -451,7 +493,6 @@ class SagepaySettingsTest extends TestCase
         $this->sagepaySettings->setAccountType($string);
     }
 
-
     /**
      * Get value of PayPal Callback URL
      *
@@ -515,16 +556,31 @@ class SagepaySettingsTest extends TestCase
     }
 
     /**
+     * Get list of Token Services
+     *
+     * @return array  List of Token Services
+     */
+    public function testSetTokenUrls()
+    {
+        $array['test']['register-server'] = 'http://test.com';
+        $this->sagepaySettings->setTokenUrls($array);
+        $urls = $this->sagepaySettings->getTokenUrls();
+        self::assertIsArray($urls);
+        self::assertSame($array['test']['register-server'], $urls['test']['register-server']);
+    }
+
+    /**
      * Get list of Shared Services
      *
      * @return array  List of Shared Services
      */
     public function testGetSharedUrls()
     {
-        $url = 'https://test.com';
-        $this->sagepaySettings->setSharedUrl($url, 'server', 'live');
-        $array = $this->sagepaySettings->getSharedUrls();
-        self::assertSame($url, $array['live']['server']);
+        $array['test']['repeat'] = 'http://test.com';
+        $this->sagepaySettings->setSharedUrls($array);
+        $urls = $this->sagepaySettings->getSharedUrls();
+        self::assertIsArray($urls);
+        self::assertSame($array['test']['repeat'], $urls['test']['repeat']);
     }
 
     /**
@@ -600,4 +656,19 @@ class SagepaySettingsTest extends TestCase
         $int = 3;
         $this->sagepaySettings->setProtocolVersion($int);
     }
+
+    /**
+     * Get Encryption password for specific environment
+     *
+     * @param  string  $env  Environment name, by default is using current environment value
+     *
+     * @return string  Encryption password
+     */
+    public function testSetFormEncryptionPassword()
+    {
+        $string = 'test';
+        $this->sagepaySettings->setFormEncryptionPassword($string, 'live');
+        self::assertSame($string, $this->sagepaySettings->getFormEncryptionPassword('live'));
+    }
+
 }
