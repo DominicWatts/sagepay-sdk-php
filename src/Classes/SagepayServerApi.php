@@ -89,7 +89,7 @@ final class SagepayServerApi extends SagepayAbstractApi
     /**
      * Get vpsServerUrl
      *
-     * @return type
+     * @return string
      */
     public function getVpsServerUrl()
     {

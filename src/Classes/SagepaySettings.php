@@ -733,7 +733,7 @@ class SagepaySettings
     /**
      * Get merchant account type
      *
-     * @return type
+     * @return string
      */
     public function getAccountType()
     {
@@ -1038,7 +1038,7 @@ class SagepaySettings
     /**
      * Get language value ISO 639-1 valid
      *
-     * @return type
+     * @return string
      */
     public function getLanguage()
     {
@@ -1049,7 +1049,7 @@ class SagepaySettings
      * Get language value ISO 639-1 valid
      * @link http://en.wikipedia.org/wiki/ISO_639
      *
-     * @param type $language
+     * @param string $language
      */
     public function setLanguage($language)
     {
@@ -1059,7 +1059,7 @@ class SagepaySettings
     /**
      * Get reference to the website this transaction came from.
      *
-     * @return type
+     * @return string
      */
     public function getWebsite()
     {

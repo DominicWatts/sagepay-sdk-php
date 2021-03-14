@@ -2,7 +2,7 @@
     "name": "dominicwatts/sagepay-sdk-php",
     "description": "Sagepay wrapper and mordernization for SDK that supports server, form and direct payments",
     "keywords": ["sagepay", "gateway", "sdk", "php"],
-    "version": "1.0.3",
+    "version": "1.0.4",
     "type": "project",
     "authors": [
         {
@@ -14,6 +14,11 @@
         "php": ">=5.6.4",
         "ext-dom": "*",
         "phpseclib/mcrypt_compat": "1.0.8"
+    },
+    "require-dev": {
+        "symfony/var-dumper": "v4.4.11",
+        "phpunit/phpunit": "9.3.7",
+        "php-coveralls/php-coveralls": "^2.2"
     },
     "autoload": {
         "psr-4": {
