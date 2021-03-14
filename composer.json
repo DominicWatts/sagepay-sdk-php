@@ -2,7 +2,7 @@
     "name": "dominicwatts/sagepay-sdk-php",
     "description": "Sagepay wrapper and mordernization for SDK that supports server, form and direct payments",
     "keywords": ["sagepay", "gateway", "sdk", "php"],
-    "version": "1.0.3",
+    "version": "1.0.4",
     "type": "project",
     "authors": [
         {
