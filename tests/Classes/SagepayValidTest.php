@@ -67,10 +67,10 @@ class SagepayValidTest extends TestCase
      */
     public function testMaxLength()
     {
-        $result = SagepayValid::minLength('xyz', 4);
+        $result = SagepayValid::maxLength('xyz', 2);
         self::assertFalse($result);
 
-        $result = SagepayValid::minLength('xyz', 2);
+        $result = SagepayValid::maxLength('xyz', 4);
         self::assertTrue($result);
     }
 
@@ -106,6 +106,12 @@ class SagepayValidTest extends TestCase
         self::assertFalse($result);
 
         $result = SagepayValid::exactLength('xyz', 3);
+        self::assertTrue($result);
+
+        $result = SagepayValid::exactLength('xyz', [4, 5]);
+        self::assertFalse($result);
+
+        $result = SagepayValid::exactLength('xyz', [2, 3]);
         self::assertTrue($result);
     }
 
@@ -193,6 +199,9 @@ class SagepayValidTest extends TestCase
      */
     public function testLuhn()
     {
+        $result = SagepayValid::luhn('abc');
+        self::assertFalse($result);
+
         $result = SagepayValid::luhn('79927398710');
         self::assertFalse($result);
 

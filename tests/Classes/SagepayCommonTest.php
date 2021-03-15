@@ -98,6 +98,8 @@ class SagepayCommonTest extends TestCase
         $this->setCustomerDetails();
         $this->setBasket();
 
+        $this->api->setPaneValues(['cardType' => 'visa']);
+
         $sagepayParams = $this->api->createRequest();
 
         self::assertIsArray($sagepayParams);
@@ -111,8 +113,8 @@ class SagepayCommonTest extends TestCase
      */
     public function testDirectCreateRequest()
     {
-        $this->expectError();
-        $this->$this->initialiseConfig();
+        // $this->expectError();
+        $this->initialiseConfig();
 
         $this->payment = new Payment(
             Payment::DIRECT,
@@ -125,9 +127,42 @@ class SagepayCommonTest extends TestCase
         $this->setCustomerDetails();
         $this->setBasket();
 
+        $this->api->setPaneValues([
+            'cardType' => 'visa',
+            'cardNumber' => '4929000000006',
+            'expiryDate' => '2227'
+        ]);
+
         $sagepayParams = $this->api->createRequest();
 
         self::assertIsArray($sagepayParams);
+    }
+
+    /**
+     * Set addressList
+     *
+     * @param SagepayCustomerDetails[] $addressList
+     */
+    public function testAddressList()
+    {
+        $this->initialiseConfig();
+
+        $this->payment = new Payment(
+            Payment::SERVER,
+            $this->config
+        );
+
+        $this->api = $this->payment->getApi();
+
+        $this->setCustomerDetails();
+
+        $addressList = $this->api->getAddressList();
+        unset($addressList[0]);
+        $this->api->setAddressList($addressList);
+
+        $updatedAddressList = $this->api->getAddressList();
+        self::assertIsArray($updatedAddressList);
+        self::assertCount(1, $updatedAddressList);
     }
 
     /***
@@ -183,6 +218,8 @@ class SagepayCommonTest extends TestCase
         $customerDetails->setPhone('01234567890');
         $customerDetails->setEmail('test@test.com');
         $this->api->setCustomerDetails($customerDetails);
+        // alias to above
+        $this->api->addAddress($customerDetails);
     }
 
     /**
