@@ -26,6 +26,10 @@ class SagepayTokenTest extends TestCase
         $sagepaySettings->setTokenUrl($url, 'remove', 'test');
         $sagepayToken = new SagepayToken($sagepaySettings);
         self::assertSame($url, $sagepayToken->getRemoveUrl());
+
+        $sagepayToken = new SagepayToken($sagepaySettings);
+        $sagepayToken->setRemoveUrl($url);
+        self::assertSame($url, $sagepayToken->getRemoveUrl());
     }
 
     /**
@@ -41,6 +45,10 @@ class SagepayTokenTest extends TestCase
         $url = 'https:://test.com';
         $sagepaySettings->setTokenUrl($url, 'register-direct', 'test');
         $sagepayToken = new SagepayToken($sagepaySettings);
+        self::assertSame($url, $sagepayToken->getRegisterUrl());
+
+        $sagepayToken = new SagepayToken($sagepaySettings);
+        $sagepayToken->setRegisterUrl($url);
         self::assertSame($url, $sagepayToken->getRegisterUrl());
     }
 

@@ -52,4 +52,21 @@ class SagepayApiFactoryTest extends TestCase
         self::assertIsObject($class);
         self::assertInstanceOf(SagepayServerApi::class, $class);
     }
+
+    /**
+     * Get transaction type
+     *
+     * @return string Transaction type
+     */
+    public function testGetTxType()
+    {
+        $payment = new Payment(Payment::SERVER);
+        $class = SagepayApiFactory::create(
+            Payment::SERVER,
+            new SagepaySettings(['test' => 'value'])
+        );
+        $string = 'xyz';
+        $class->setTxType($string);
+        self::assertNotSame($string, $class->getTxType());
+    }
 }

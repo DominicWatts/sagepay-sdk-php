@@ -29,6 +29,14 @@ class SagepaySurchargeTest extends TestCase
         self::assertNotEmpty($result);
     }
 
+    public function testAddFixedSurchargeDetails()
+    {
+        $this->sagepaySurcharge->addSurchargeDetails('visa', null, 10);
+        $result = $this->sagepaySurcharge->getSurcharges();
+        self::assertIsArray($result);
+        self::assertNotEmpty($result);
+    }
+
     public function testInvalidAddSurchargeDetails()
     {
         $this->sagepaySurcharge->addSurchargeDetails('invalid', '10', '10');
@@ -68,5 +76,4 @@ class SagepaySurchargeTest extends TestCase
         $surcharge->addChild('percentage', $percentage);
         self::assertXmlStringEqualsXmlString($testSurcharge->asXML(), $this->sagepaySurcharge->export());
     }
-
 }
